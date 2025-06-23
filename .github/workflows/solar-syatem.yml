@@ -6,6 +6,11 @@ on:
         branches:
             - main
             - 'feature/*'
+
+env:
+  MONGO_URI: mangodb+srv://supercluster.d83jj.magodb.net/superData
+  MONGO_USERNAME: ${{vars.MONGO_USERNAME}}
+  MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
 jobs:
     Unit-Testing:
         name: unit testing
