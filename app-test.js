@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 let { MongoMemoryServer } = require('mongodb-memory-server'); // Import MongoMemoryServer
-let server = require("../app"); // Your Express app
+let server = require("./app"); // Your Express app
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 
