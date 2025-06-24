@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const Planet = require('./models/Planet'); // Adjust path based on your 'models' directory location
 
 // Middleware
-app.use(express.json());
+app.use(express.json())
 
 // MongoDB Connection (for development/production, handled by test setup for tests)
 // ... (your existing connection logic) ...

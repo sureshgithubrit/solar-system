@@ -1,0 +1,28 @@
+{
+  "mcp": {
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "github_token",
+        "description": "GitHub Personal Access Token",
+        "password": true
+      }
+    ],
+    "servers": {
+      "github": {
+        "command": "wsl.exe", // Execute wsl.exe from Windows
+        "args": [
+          "docker", // This `docker` command will now run inside WSL
+          "run",
+          "-i",
+          "--rm",
+          "mcp/github"
+        ],
+        "env": {
+          "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
+        },
+        "transport": "stdio" // Assuming your Dockerized MCP server communicates via stdio
+      }
+    }
+}
+}
