@@ -22,7 +22,11 @@
           "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
         },
         "transport": "stdio" // Assuming your Dockerized MCP server communicates via stdio
+      },
+      "time": {
+        "command": "wsl.exe",
+        "args": ["docker", "run", "-i", "--rm", "mcp/time"]
       }
     }
-}
+  }
 }

@@ -1,49 +1,61 @@
-# Solar System NodeJS Application
+# Solar System API
 
-A simple HTML+MongoDB+NodeJS project to display Solar System and it's planets.
+A Node.js REST API to explore planets in the solar system, built with Express and MongoDB. Includes endpoints for planet lookup, system info, and health checks. Unit tests are provided and run in CI with GitHub Actions.
 
----
-## Requirements
+## Features
+- Lookup planet details by ID
+- System info endpoint
+- Liveness and readiness endpoints
+- MongoDB integration
+- Unit tests with in-memory MongoDB
+- GitHub Actions workflow for CI and test artifact upload
 
-For development, you will only need Node.js and NPM installed in your environement.
+## Endpoints
 
-### Node
-- #### Node installation on Windows
+### POST `/planet`
+- **Description:** Get planet details by ID
+- **Body:** `{ "id": <number> }`
+- **Response:** 200 with planet object, 400 if missing ID, 404 if not found
 
-  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
-Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
+### GET `/os`
+- **Description:** Returns system info (platform, arch, CPU count)
 
-- #### Node installation on Ubuntu
+### GET `/live`
+- **Description:** Liveness probe
 
-  You can install nodejs and npm easily with apt install, just run the following commands.
+### GET `/ready`
+- **Description:** Readiness probe
 
-      $ sudo apt install nodejs
-      $ sudo apt install npm
+## Getting Started
 
-- #### Other Operating Systems
-  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
+### Prerequisites
+- Node.js 20+
+- MongoDB (local or connection string)
 
-If the installation was successful, you should be able to run the following command.
+### Install
+```bash
+npm install
+```
 
-    $ node --version
-    v8.11.3
+### Run Locally
+```bash
+npm start
+```
 
-    $ npm --version
-    6.1.0
+### Run Tests
+```bash
+npm test
+```
 
----
-## Install Dependencies from `package.json`
-    $ npm install
+## Project Structure
+- `app.js` - Main Express app
+- `models/Planet.js` - Mongoose model for planets
+- `app-test.js` - Test suite (Mocha/Chai, in-memory MongoDB)
+- `.github/workflows/nodejs-ci.yml` - GitHub Actions workflow
 
-## Run Unit Testing
-    $ npm test
+## CI/CD
+- On push or PR to `main`, tests run and a JUnit report is uploaded as an artifact.
 
-## Run Code Coverage
-    $ npm run coverage
-
-## Run Application
-    $ npm start
-
-## Access Application on Browser
-    http://localhost:3000/
+## License
+MIT
 

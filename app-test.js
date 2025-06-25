@@ -47,5 +47,72 @@ describe('Planets API Suite', () => {
         console.log('In-memory MongoDB stopped and disconnected.');
     });
 
-    // ... (rest of your tests remain the same) ...
+    // Test: POST /planet with valid id returns planet
+    it('should return planet for valid id', (done) => {
+        chai.request(server)
+            .post('/planet')
+            .send({ id: 3 })
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('name').eql('Earth');
+                done();
+            });
+    });
+
+    // Test: POST /planet with missing id returns 400
+    it('should return 400 for missing id', (done) => {
+        chai.request(server)
+            .post('/planet')
+            .send({})
+            .end((err, res) => {
+                res.should.have.status(400);
+                done();
+            });
+    });
+
+    // Test: POST /planet with unknown id returns 404
+    it('should return 404 for unknown id', (done) => {
+        chai.request(server)
+            .post('/planet')
+            .send({ id: 999 })
+            .end((err, res) => {
+                res.should.have.status(404);
+                done();
+            });
+    });
+
+    // Test: GET /os returns system info
+    it('should return system info for /os', (done) => {
+        chai.request(server)
+            .get('/os')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('platform');
+                res.body.should.have.property('arch');
+                res.body.should.have.property('cpus');
+                done();
+            });
+    });
+
+    // Test: GET /live returns live status
+    it('should return live status for /live', (done) => {
+        chai.request(server)
+            .get('/live')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('status').eql('live');
+                done();
+            });
+    });
+
+    // Test: GET /ready returns ready status
+    it('should return ready status for /ready', (done) => {
+        chai.request(server)
+            .get('/ready')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('status').eql('ready');
+                done();
+            });
+    });
 });
