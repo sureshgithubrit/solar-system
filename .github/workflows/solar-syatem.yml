@@ -14,15 +14,23 @@ env:
 jobs:
     Unit-Testing:
         name: unit testing
-        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            node-version: [18,19,20]
+            opearting-syatem: [ubuntu-latest, macos-latest]
+            exclude:
+              - node-version: 18
+                opearting-syatem: macos-latest
+
+        runs-on: ${{matrix.opearting-syatem}}
         steps:
         - name: checkout Repo
           uses: actions/checkout@v4
 
-        - name: install node version - 18
+        - name: install node version - ${{matrix.node-version}}
           uses: actions/setup-node@v4
           with:
-            node-version: 18
+            node-version: ${{matrix.node-version}}
             
         - name: install dependencies
           run: npm install --save-dev mongodb-memory-server
